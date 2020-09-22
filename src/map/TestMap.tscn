@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 737.371, 30.9936 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 182.603, 30.9936 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Test"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 410.397, 830.376 ), Vector2( 674.099, 652.078 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 498.603, 30.9936 )
+
+[node name="TestMap" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 942.397, 1027.83 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+scale = Vector2( 23.059, 1 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D2" type="KinematicBody2D" parent="."]
+position = Vector2( 666.55, 657.182 )
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+scale = Vector2( 5.7765, 1 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody2D2"]
+autoplay = "Test"
+playback_process_mode = 0
+anims/Test = SubResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 1390.53, 594.584 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+scale = Vector2( 15.6215, 1 )
+texture = ExtResource( 2 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1254.08, 468.97 )
