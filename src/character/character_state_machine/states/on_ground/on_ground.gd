@@ -2,6 +2,10 @@ extends "../character_state.gd"
 
 #export(NodePath) var GROUNDED_CHECK_PATH
 
+func enter() -> void:
+	owner.set_snap(true)
+	.enter()
+
 
 func handle_input(event) -> void:
 	.handle_input(event)

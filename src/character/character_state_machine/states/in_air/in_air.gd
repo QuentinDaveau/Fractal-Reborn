@@ -2,6 +2,8 @@ extends "../character_state.gd"
 
 
 func enter() -> void:
+	owner.set_snap(false)
+	owner.set_to_world_velocity()
 	.enter()
 
 

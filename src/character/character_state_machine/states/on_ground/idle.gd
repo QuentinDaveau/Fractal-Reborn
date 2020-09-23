@@ -7,6 +7,7 @@ func enter() -> void:
 	if _input_direction.x:
 		emit_signal("finished", "move")
 		return
+	.enter()
 #	ANIMATION_STATE.travel("idle")
 
 

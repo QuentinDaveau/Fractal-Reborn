@@ -23,19 +23,20 @@ START_STATE = NodePath("Idle")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
-MAX_VELOCITY = 500.0
-ACCELERATION = 20.0
+MAX_VELOCITY = 750.0
+ACCELERATION = 15.0
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
-ACCELERATION = 50.0
+ACCELERATION = 15.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
-MAX_VELOCITY = 500.0
-ACCELERATION = 5.0
+MAX_VELOCITY = 750.0
+ACCELERATION = 4.0
+JUMP_VELOCITY = 1000.0
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
-MAX_VELOCITY = 500.0
-ACCELERATION = 5.0
+MAX_VELOCITY = 750.0
+ACCELERATION = 4.0

@@ -7,9 +7,9 @@ var _is_falling: bool = false
 
 
 func enter() -> void:
+	.enter()
 	owner.add_velocity(Vector2.UP * JUMP_VELOCITY)
 #	ANIMATION_STATE.travel("jump")
-	.enter()
 
 
 func handle_input(event) -> void:
