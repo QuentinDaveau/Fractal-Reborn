@@ -1,7 +1,7 @@
 extends Node
 
 
-var _game_camera: GameCamera
+var _game_camera: Camera2D
 
 
 func _ready() -> void:
@@ -9,11 +9,11 @@ func _ready() -> void:
 	# assert(_game_camera != null)
 
 
-func get_camera() -> GameCamera:
+func get_camera() -> Camera2D:
 	return _game_camera
 
 
-func _find_camera(parent_node: Node) -> GameCamera:
+func _find_camera(parent_node: Node) -> Camera2D:
 	for children in parent_node.get_children():
 		if children.get_name() == "GameCamera":
 			return children

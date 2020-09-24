@@ -35,5 +35,9 @@ func get_velocity() -> Vector2:
 	return _velocity
 
 
+func get_world_velocity() -> Vector2:
+	return _world_velocity
+
+
 func move(delta: float, velocity: Vector2) -> void:
 	_velocity = move_and_slide_with_snap(velocity, _snap, GROUND_VECT)

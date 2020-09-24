@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/character/character_state_machine/states/on_ground/move.gd" type="Script" id=1]
 [ext_resource path="res://src/character/character_state_machine/states/on_ground/idle.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://src/character/character_state_machine/character_state_machine.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://src/character/Character.gd" type="Script" id=7]
+[ext_resource path="res://src/character/motion_logger.gd" type="Script" id=8]
+[ext_resource path="res://src/character/log_debugger.gd" type="Script" id=9]
+[ext_resource path="res://src/character/motion_predictor_debugger.gd" type="Script" id=10]
 
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 7 )
@@ -40,3 +43,14 @@ JUMP_VELOCITY = 1000.0
 script = ExtResource( 3 )
 MAX_VELOCITY = 750.0
 ACCELERATION = 4.0
+
+[node name="Loggers" type="Node" parent="."]
+
+[node name="MotionLogger" type="Node" parent="Loggers"]
+script = ExtResource( 8 )
+
+[node name="LogDebugger" type="Node2D" parent="Loggers/MotionLogger"]
+script = ExtResource( 9 )
+
+[node name="MotionPredictorDebugger" type="Node2D" parent="Loggers/MotionLogger"]
+script = ExtResource( 10 )
