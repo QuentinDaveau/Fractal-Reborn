@@ -41,3 +41,7 @@ func get_world_velocity() -> Vector2:
 
 func move(delta: float, velocity: Vector2) -> void:
 	_velocity = move_and_slide_with_snap(velocity, _snap, GROUND_VECT)
+
+
+func get_logs() -> Array:
+	return $Loggers/MotionLogger.get_logs()

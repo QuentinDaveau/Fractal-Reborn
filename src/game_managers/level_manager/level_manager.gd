@@ -14,5 +14,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		var map_center_position = _level_instance.new_gen()
-		print(map_center_position)
 		CameraManager.get_camera().position = map_center_position

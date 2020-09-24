@@ -15,7 +15,6 @@ func _change_state(state_name):
 	if state_name in ["fall", "jump"]:
 		if not(current_state in [states_map["fall"], states_map["jump"]]):
 			states_stack.push_front(states_map[state_name])
-	print(state_name)
 	._change_state(state_name)
 
 

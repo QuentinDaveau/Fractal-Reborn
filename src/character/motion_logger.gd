@@ -17,7 +17,6 @@ var _previous_world_velocity: Vector2 = Vector2.ZERO
 # Takes an initial snapshot when ready
 func _ready() -> void:
 	_take_snap()
-	# Debug
 
 
 # Every LOG_RATE_SEC, or when a important change in velocity is detected, takes a snapshot
@@ -40,8 +39,13 @@ func _take_snap() -> void:
 	_delay = LOG_RATE_SEC
 
 
-# Debug
+# DEBUG
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		print(_logs)
 		get_tree().quit() # default behavior
+
+
+# Returns the saved logs
+func get_logs() -> Array:
+	return _logs
