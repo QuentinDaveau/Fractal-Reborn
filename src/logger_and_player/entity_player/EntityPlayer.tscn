@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/logger_and_player/entity_player/entity_player.gd" type="Script" id=1]
+
+[node name="EntityPlayer" type="Node" groups=[
+"Player",
+]]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Entity" type="Node" parent="."]

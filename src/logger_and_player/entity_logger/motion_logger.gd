@@ -9,6 +9,7 @@ const DIFFERENTIAL_THRESHOLD: float = 8000.0
 
 onready var _start_time: int = OS.get_ticks_msec()
 
+var _entity: Node2D
 var _logs: Array = []
 var _delay: float = 0
 var _previous_world_velocity: Vector2 = Vector2.ZERO
@@ -16,6 +17,7 @@ var _previous_world_velocity: Vector2 = Vector2.ZERO
 
 # Takes an initial snapshot when ready
 func _ready() -> void:
+	_entity = get_node("../Entity").get_child(0)
 	_take_snap()
 
 
@@ -26,24 +28,20 @@ func _process(delta: float) -> void:
 	_delay -= delta
 	if _delay <= 0:
 		_take_snap()
-		_previous_world_velocity = owner.get_world_velocity()
+		_previous_world_velocity = _entity.get_world_velocity()
 		return
-	if _previous_world_velocity.distance_to(owner.get_world_velocity()) / delta >= DIFFERENTIAL_THRESHOLD:
+	if _previous_world_velocity.distance_to(_entity.get_world_velocity()) / delta >= DIFFERENTIAL_THRESHOLD:
 		_take_snap()
-	_previous_world_velocity = owner.get_world_velocity()
+	_previous_world_velocity = _entity.get_world_velocity()
 
 
 #Saves a snapshot
 func _take_snap() -> void:
-	_logs.append([OS.get_ticks_msec() - _start_time, owner.global_position, owner.get_world_velocity()])
+#	_logs.append([OS.get_ticks_msec() - _start_time, _entity.global_position, _entity.get_world_velocity()])
+	owner.log_property(_entity, "position", _entity.position)
 	_delay = LOG_RATE_SEC
-
-
-# DEBUG
-#func _notification(what):
-#	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-#		print(_logs)
-#		get_tree().quit() # default behavior
+	# DEBUG
+	$MotionPredictorDebugger.add_point(_entity.position)
 
 
 # Returns the saved logs

@@ -1,10 +1,12 @@
 extends Node
 
 
-export(float) var _zoom_level: float = 0.1
+export(float) var _zoom_level: float = 0.0
 
 onready var _map: Resource = load("res://src/map/TestMap.tscn")
 onready var _clone: Resource = load("res://src/clone/Clone.tscn")
+onready var _entity_logger: Resource = load("res://src/logger_and_player/entity_logger/EntityLogger.tscn")
+onready var _entity_player: Resource = load("res://src/logger_and_player/entity_player/EntityPlayer.tscn")
 
 var _active_map: Node2D
 var _gen: int = 0
@@ -18,14 +20,17 @@ func _ready() -> void:
 func new_gen() -> Vector2:
 	_gen += 1
 	var logs_buffer = []
-	for e in get_tree().get_nodes_in_group("Logged"):
-		logs_buffer.append(e.get_logs())
+	for e in get_tree().get_nodes_in_group("Logger"):
+		logs_buffer.append(e.get_log())
 	_regenerate_map()
 	for e in logs_buffer:
 		var clone = _clone.instance()
-		clone.setup(e)
-		_active_map.add_child(clone)
-		print("eeeee")
+		var player = _entity_player.instance()
+		player.set_log(e)
+		player.set_entity(clone)
+#		clone.setup(e)
+#		_active_map.add_child(clone)
+		_active_map.add_child(player)
 	return Vector2(960, 540) * (1 + (_zoom_level * _gen))
 
 

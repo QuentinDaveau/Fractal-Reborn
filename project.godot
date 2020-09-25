@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 CameraManager="*res://src/autoload/camera_manager.gd"
+ReplayClock="*res://src/autoload/replay_clock.gd"
 
 [display]
 
