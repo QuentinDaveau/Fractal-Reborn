@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/character/character_state_machine/states/on_ground/move.gd" type="Script" id=1]
 [ext_resource path="res://src/character/character_state_machine/states/on_ground/idle.gd" type="Script" id=2]
@@ -10,10 +10,17 @@
 [ext_resource path="res://src/character/motion_logger.gd" type="Script" id=8]
 [ext_resource path="res://src/character/log_debugger.gd" type="Script" id=9]
 [ext_resource path="res://src/character/motion_predictor_debugger.gd" type="Script" id=10]
+[ext_resource path="res://src/character/weapon_checker.gd" type="Script" id=11]
+[ext_resource path="res://src/character/weapon_manager.gd" type="Script" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 80 )
 
 [node name="Character" type="KinematicBody2D" groups=[
 "Logged",
 ]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 7 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -21,6 +28,21 @@ polygon = PoolVector2Array( -28, -32, -32, -28, -32, 28, -28, 32, 28, 32, 32, 28
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 6 )
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource( 12 )
+
+[node name="WeaponHolder" type="RemoteTransform2D" parent="WeaponManager"]
+update_scale = false
+
+[node name="WeaponChecker" type="Area2D" parent="WeaponManager"]
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponManager/WeaponChecker"]
+shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )

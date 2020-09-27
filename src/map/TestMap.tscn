@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://src/logger_and_player/entity_logger/EntityLogger.tscn" type="PackedScene" id=3]
-
-
+[ext_resource path="res://src/object/gun/Gun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 737.371, 30.9936 )
@@ -31,6 +30,9 @@ tracks/0/keys = {
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 498.603, 30.9936 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 498.603, 3.06799 )
 
 [node name="TestMap" type="Node2D"]
 
@@ -70,9 +72,26 @@ shape = SubResource( 4 )
 scale = Vector2( 15.6215, 1 )
 texture = ExtResource( 2 )
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2( 1792.6, 127.893 )
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D4"]
+scale = Vector2( 15.6215, 0.109375 )
+texture = ExtResource( 2 )
+
 [node name="LoggedEntity" parent="." instance=ExtResource( 3 )]
 
 [node name="Character" parent="LoggedEntity/Entity" index="0" instance=ExtResource( 1 )]
-position = Vector2( 1254.08, 468.97 )
+position = Vector2( 1201.75, 470.384 )
+
+[node name="Gun" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1201.75, 470.384 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1453.84, 467.525 )
 
 [editable path="LoggedEntity"]

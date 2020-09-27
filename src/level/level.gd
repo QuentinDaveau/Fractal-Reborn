@@ -25,12 +25,12 @@ func new_gen() -> Vector2:
 	_regenerate_map()
 	for e in logs_buffer:
 		var clone = _clone.instance()
-		var player = _entity_player.instance()
-		player.set_log(e)
-		player.set_entity(clone)
+		var entity_player = _entity_player.instance()
+		entity_player.set_log(e)
+		entity_player.set_entity(clone)
 #		clone.setup(e)
 #		_active_map.add_child(clone)
-		_active_map.add_child(player)
+		_active_map.add_child(entity_player)
 	return Vector2(960, 540) * (1 + (_zoom_level * _gen))
 
 

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/object/gun/gun.gd" type="Script" id=1]
+[ext_resource path="res://src/object/gun/shoot_manager.gd" type="Script" id=2]
+
+[node name="Gun" type="KinematicBody2D"]
+z_index = 1
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20, 4, -16, 8, -8, 12, 4, 12, 36, 4, 36, -4, 4, -12, -8, -12, -16, -8, -20, -4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( -20, 4, -16, 8, -8, 12, 4, 12, 36, 4, 36, -4, 4, -12, -8, -12, -16, -8, -20, -4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ShootManager" type="Position2D" parent="."]
+position = Vector2( 18.6375, 0 )
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="ShootManager"]
+wait_time = 0.2
+one_shot = true
