@@ -88,10 +88,12 @@ texture = ExtResource( 2 )
 [node name="Character" parent="LoggedEntity/Entity" index="0" instance=ExtResource( 1 )]
 position = Vector2( 1201.75, 470.384 )
 
-[node name="Gun" parent="." instance=ExtResource( 4 )]
+[node name="EntityLogger" parent="." instance=ExtResource( 3 )]
+_clone_path = "res://src/object/gun/Gun.tscn"
+
+[node name="Gun" parent="EntityLogger/Entity" index="0" instance=ExtResource( 4 )]
 position = Vector2( 1201.75, 470.384 )
 
-[node name="Character" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1453.84, 467.525 )
-
 [editable path="LoggedEntity"]
+
+[editable path="EntityLogger"]

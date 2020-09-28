@@ -12,27 +12,39 @@ onready var _start_time: int = OS.get_ticks_msec()
 var _entity: Node2D
 var _logs: Array = []
 var _delay: float = 0
+
+var _entity_old_pos: Vector2
 var _previous_world_velocity: Vector2 = Vector2.ZERO
+var _world_velocity: Vector2 = Vector2.ZERO
+
+
+func setup(entity: Node2D) -> void:
+	_entity = entity
 
 
 # Takes an initial snapshot when ready
 func _ready() -> void:
-	_entity = get_node("../Entity").get_child(0)
+	if not _entity:
+		_entity = owner.get_node("Entity").get_child(0)
+	_entity_old_pos = _entity.global_position
 	_take_snap()
 
 
 # Every LOG_RATE_SEC, or when a important change in velocity is detected, takes a snapshot
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if delta == 0:
 		return
+	if not is_instance_valid(_entity):
+		return
 	_delay -= delta
+	_previous_world_velocity = _world_velocity
+	_world_velocity = (_entity.global_position - _entity_old_pos) / delta
+	_entity_old_pos = _entity.global_position
 	if _delay <= 0:
 		_take_snap()
-		_previous_world_velocity = _entity.get_world_velocity()
 		return
-	if _previous_world_velocity.distance_to(_entity.get_world_velocity()) / delta >= DIFFERENTIAL_THRESHOLD:
+	if _previous_world_velocity.distance_to(_world_velocity) / delta >= DIFFERENTIAL_THRESHOLD:
 		_take_snap()
-	_previous_world_velocity = _entity.get_world_velocity()
 
 
 #Saves a snapshot

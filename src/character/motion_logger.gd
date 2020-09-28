@@ -39,13 +39,6 @@ func _take_snap() -> void:
 	_delay = LOG_RATE_SEC
 
 
-# DEBUG
-#func _notification(what):
-#	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-#		print(_logs)
-#		get_tree().quit() # default behavior
-
-
 # Returns the saved logs
 func get_logs() -> Array:
 	return _logs

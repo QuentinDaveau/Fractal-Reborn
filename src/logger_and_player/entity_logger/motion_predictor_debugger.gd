@@ -5,6 +5,7 @@ var _logs: Array = []
 
 
 func add_point(point: Vector2) -> void:
+	return
 	_logs.append(point)
 	CURVE.clear_points()
 	for i in range(1, _logs.size() - 1):

@@ -9,17 +9,26 @@ var _velocity: Vector2 = Vector2.ZERO
 var is_being_shot: bool = true
 
 
+func enable_replay() -> void:
+	.enable_replay()
+	set_sync_to_physics(true)
+
 
 func set_velocity(velocity: Vector2) -> void:
 	_velocity = velocity
 
 
 func _enter_tree() -> void:
+	if _is_replay:
+		return
 	rotation = _velocity.angle()
 	_spawn_position = global_position
 
 
 func _physics_process(delta: float) -> void:
+	if _is_replay:
+		collision_mask += 2
+		return
 	if is_being_shot:
 		if _spawn_position.distance_to(global_position) > BULLET_ENABLE_DIST:
 			collision_mask += 2
@@ -27,8 +36,12 @@ func _physics_process(delta: float) -> void:
 	_velocity.y += GRAVITY * delta
 	var collision = move_and_collide(_velocity * delta)
 	if collision:
-		queue_free()
+		log_and_free()
 
 
 func _on_Timer_timeout() -> void:
-	queue_free()
+	if _is_replay:
+		return
+	log_and_free()
+
+

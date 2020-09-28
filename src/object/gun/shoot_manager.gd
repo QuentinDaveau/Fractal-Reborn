@@ -12,4 +12,4 @@ func shoot() -> void:
 	var b = _bullet.instance()
 	b.set_velocity((Vector2.RIGHT * SHOOT_VELOCITY).rotated(global_rotation))
 	b.global_position = global_position
-	get_tree().get_root().add_child(b)
+	b.prepare_and_spawn(owner.get_parent(), _bullet)

@@ -21,13 +21,16 @@ func new_gen() -> Vector2:
 	_gen += 1
 	var logs_buffer = []
 	for e in get_tree().get_nodes_in_group("Logger"):
-		logs_buffer.append(e.get_log())
+		logs_buffer.append(e.get_log_data())
 	_regenerate_map()
 	for e in logs_buffer:
-		var clone = _clone.instance()
+		var clone
+		if e.has("clone") and e["clone"]:
+			clone = e["clone"]
+		else:
+			clone = _clone
 		var entity_player = _entity_player.instance()
-		entity_player.set_log(e)
-		entity_player.set_entity(clone)
+		entity_player.setup(e["log"], clone)
 #		clone.setup(e)
 #		_active_map.add_child(clone)
 		_active_map.add_child(entity_player)
