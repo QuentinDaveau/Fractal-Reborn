@@ -27,7 +27,7 @@ func _ready() -> void:
 	if not _entity:
 		_entity = owner.get_node("Entity").get_child(0)
 	_entity_old_pos = _entity.global_position
-	_take_snap()
+	call_deferred("_take_snap")
 
 
 # Every LOG_RATE_SEC, or when a important change in velocity is detected, takes a snapshot
@@ -49,6 +49,8 @@ func _physics_process(delta: float) -> void:
 
 #Saves a snapshot
 func _take_snap() -> void:
+	if not _entity:
+		return
 #	_logs.append([OS.get_ticks_msec() - _start_time, _entity.global_position, _entity.get_world_velocity()])
 	owner.log_property(_entity, "position", _entity.position)
 	_delay = LOG_RATE_SEC

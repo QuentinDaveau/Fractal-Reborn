@@ -1,9 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://src/logger_and_player/entity_logger/EntityLogger.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/object/gun/Gun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 737.371, 30.9936 )
@@ -82,18 +79,3 @@ shape = SubResource( 5 )
 [node name="Sprite" type="Sprite" parent="StaticBody2D4"]
 scale = Vector2( 15.6215, 0.109375 )
 texture = ExtResource( 2 )
-
-[node name="LoggedEntity" parent="." instance=ExtResource( 3 )]
-
-[node name="Character" parent="LoggedEntity/Entity" index="0" instance=ExtResource( 1 )]
-position = Vector2( 1201.75, 470.384 )
-
-[node name="EntityLogger" parent="." instance=ExtResource( 3 )]
-_clone_path = "res://src/object/gun/Gun.tscn"
-
-[node name="Gun" parent="EntityLogger/Entity" index="0" instance=ExtResource( 4 )]
-position = Vector2( 1201.75, 470.384 )
-
-[editable path="LoggedEntity"]
-
-[editable path="EntityLogger"]

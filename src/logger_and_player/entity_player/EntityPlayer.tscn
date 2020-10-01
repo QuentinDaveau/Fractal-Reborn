@@ -11,4 +11,4 @@ script = ExtResource( 1 )
 root_node = NodePath("../Entity")
 playback_process_mode = 0
 
-[node name="Entity" type="Node" parent="."]
+[node name="Entity" type="Node2D" parent="."]

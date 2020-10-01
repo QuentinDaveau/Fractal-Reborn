@@ -7,7 +7,7 @@ var _is_replay: bool = false
 
 
 func prepare_and_spawn(node_to_child: Node, clone_pack: Resource) -> void:
-	LOGGER = Warehouse.get_logger().instance()
+	LOGGER = Warehouse.get_resource("Logger").instance()
 	LOGGER.set_entity(self, clone_pack)
 	node_to_child.add_child(LOGGER)
 
