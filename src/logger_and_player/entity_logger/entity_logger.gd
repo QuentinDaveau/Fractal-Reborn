@@ -50,6 +50,7 @@ func log_method(source: Node, method: String, args: Array = [], execute: bool = 
 	_log.track_insert_key(track_id, ReplayClock.get_run_time(), {"method" : method , "args" : args})
 	if method == "queue_free":
 		$MotionLogger._take_snap()
+		$MotionLogger._entity = null
 	if execute:
 		if args.size() > 0:
 			source.call(method, args)
