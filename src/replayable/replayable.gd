@@ -14,6 +14,7 @@ func prepare_and_spawn(node_to_child: Node, clone_pack: Resource) -> void:
 
 func enable_replay() -> void:
 	_is_replay = true
+	collision_layer += 16
 
 
 func log_and_free() -> void:

@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Replayable
 
 const WALL_ANGLE: float = PI/4
 const SNAP_VECT: Vector2 = Vector2.DOWN * 50
