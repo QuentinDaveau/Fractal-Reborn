@@ -15,6 +15,8 @@ func _ready() -> void:
 	_actif_level = _level.instance()
 	_actif_level.set_map(_default_map)
 	$Levels.add_child(_actif_level)
+	$SpawnManager.update_area()
+	$ArenaBound.update_bounds()
 
 
 func _process(delta: float) -> void:
@@ -36,6 +38,8 @@ func _new_gen() -> void:
 	$Levels.add_child(_actif_level)
 	ReplayClock.reset_timer()
 	CameraManager.get_camera().position = Vector2(960, 540) * zoom_level
+	$ArenaBound.update_bounds()
+	$SpawnManager.update_area()
 #	var logs_buffer = []
 #	for e in get_tree().get_nodes_in_group("Logger"):
 #		logs_buffer.append(e.get_log_data())

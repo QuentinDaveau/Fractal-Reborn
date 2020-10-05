@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/game_managers/level_manager/level_manager.gd" type="Script" id=1]
 [ext_resource path="res://src/game_managers/level_manager/logger_converter.gd" type="Script" id=2]
+[ext_resource path="res://src/game_managers/level_manager/arena_bound.gd" type="Script" id=3]
+[ext_resource path="res://src/game_managers/level_manager/spawn_area.gd" type="Script" id=4]
+[ext_resource path="res://src/game_managers/level_manager/spawn_manager.gd" type="Script" id=5]
 
 [node name="LevelManager" type="Node"]
 script = ExtResource( 1 )
@@ -10,3 +13,19 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Levels" type="Node" parent="."]
+
+[node name="SpawnManager" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="SpawnArea" type="Node2D" parent="SpawnManager"]
+script = ExtResource( 4 )
+
+[node name="ArenaBound" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaBound"]
+polygon = PoolVector2Array( -985, -765, 985, -765, 985, 565, -985, 565, -985, -765, -1440, -1160, -1440, 960, 1440, 960, 1440, -1160, -1440, -1160 )
+[connection signal="body_entered" from="ArenaBound" to="ArenaBound" method="_on_ArenaBound_body_entered"]
