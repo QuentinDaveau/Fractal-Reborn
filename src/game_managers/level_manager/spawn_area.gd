@@ -5,8 +5,8 @@ var _spawn_area: Rect2
 
 
 func update_spawn_area() -> void:
-	_spawn_area = Rect2(CameraManager.get_camera().global_position - Vector2(850, 450)
-			, Vector2(850, 450) * 2)
+	_spawn_area = Rect2(CameraManager.get_camera().global_position - Vector2(825, 425)
+			, Vector2(825, 425) * 2)
 	update()
 
 

@@ -35,6 +35,7 @@ extents = Vector2( 498.603, 3.06799 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 942.397, 959.334 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
@@ -61,6 +62,7 @@ anims/Test = SubResource( 3 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2( 1390.53, 594.584 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource( 4 )
@@ -72,6 +74,7 @@ texture = ExtResource( 2 )
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2( 1792.6, 127.893 )
 rotation = -1.57079
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource( 5 )

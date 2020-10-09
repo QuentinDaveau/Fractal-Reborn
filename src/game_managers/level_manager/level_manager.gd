@@ -36,10 +36,20 @@ func _new_gen() -> void:
 	_actif_level = _level.instance()
 	_actif_level.set_map(_empty_map)
 	$Levels.add_child(_actif_level)
-	ReplayClock.reset_timer()
 	CameraManager.get_camera().position = Vector2(960, 540) * zoom_level
 	$ArenaBound.update_bounds()
 	$SpawnManager.update_area()
+	get_tree().paused = true
+	var spawn_positions := []
+	for i in range(1):
+		$SpawnManager.find_spawn_position()
+		spawn_positions.append(yield($SpawnManager, "spawn_position_found"))
+	ReplayClock.reset_timer()
+	for p in spawn_positions:
+		var player: Replayable = Warehouse.get_resource("Character").instance()
+		player.global_position = p
+		player.prepare_and_spawn(_actif_level.get_node("Entities"), Warehouse.get_resource("CharacterClone"))
+	get_tree().paused = false
 #	var logs_buffer = []
 #	for e in get_tree().get_nodes_in_group("Logger"):
 #		logs_buffer.append(e.get_log_data())
