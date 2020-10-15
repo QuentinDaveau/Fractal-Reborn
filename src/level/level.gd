@@ -5,6 +5,10 @@ var _map_resource: Resource
 var _active_map: Node2D
 
 
+func get_entities_container() -> Node:
+	return $Entities
+
+
 func set_map(map_resource: Resource) -> void:
 	_map_resource = map_resource
 	_active_map = _map_resource.instance()

@@ -11,8 +11,6 @@ var is_being_shot: bool = true
 
 func enable_replay() -> void:
 	.enable_replay()
-	set_sync_to_physics(true)
-	collision_mask += 2
 
 
 func set_velocity(velocity: Vector2) -> void:

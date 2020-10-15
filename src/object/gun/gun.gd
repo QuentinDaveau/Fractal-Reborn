@@ -2,6 +2,21 @@ extends Replayable
 
 signal disappeared()
 
+const SNAP_VECT: Vector2 = Vector2.DOWN * 50
+const GROUND_VECT: Vector2 = Vector2.UP
+
+onready var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+var _velocity: Vector2 = Vector2.ZERO
+var _picked: bool = false
+
+
+func _physics_process(delta: float) -> void:
+	if _picked:
+		return
+	_velocity.y += GRAVITY * delta
+	_velocity = move_and_slide_with_snap(_velocity, SNAP_VECT, GROUND_VECT)
+
 
 func attack() -> void:
 	$ShootManager.shoot()
@@ -9,6 +24,7 @@ func attack() -> void:
 
 func pick(picker_body: PhysicsBody2D) -> void:
 	$CollisionPolygon2D.disabled = true
+	_picked = true
 	_disappear()
 
 
@@ -19,6 +35,7 @@ func appear() -> void:
 
 func drop() -> void:
 	$CollisionPolygon2D.disabled = false
+	_picked = false
 
 
 func _disappear() -> void:

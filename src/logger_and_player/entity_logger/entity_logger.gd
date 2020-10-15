@@ -63,7 +63,6 @@ func get_log_data() -> Dictionary:
 	if not _clone and _clone_path:
 		_clone = load(_clone_path)
 	_log.length = ReplayClock.get_run_time()
-#	ResourceSaver.save("res://_log.tres", _log)
 	return {"clone": _clone, "log": _log}
 
 

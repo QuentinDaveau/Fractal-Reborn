@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/game_managers/level_manager/level_manager.gd" type="Script" id=1]
 [ext_resource path="res://src/game_managers/level_manager/logger_converter.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/game_managers/level_manager/spawn_area.gd" type="Script" id=4]
 [ext_resource path="res://src/game_managers/level_manager/spawn_manager.gd" type="Script" id=5]
 [ext_resource path="res://src/spawn_finder/SpawnFinder.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/game_managers/level_manager/players_spawner.gd" type="Script" id=7]
+[ext_resource path="res://src/game_managers/level_manager/items_spawner.gd" type="Script" id=8]
 
 [node name="LevelManager" type="Node"]
 script = ExtResource( 1 )
@@ -14,6 +16,15 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Levels" type="Node" parent="."]
+
+[node name="PlayersSpawner" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="ItemsSpawner" type="Node" parent="."]
+script = ExtResource( 8 )
+_spawn_manager_path = NodePath("../SpawnManager")
+
+[node name="Timer" type="Timer" parent="ItemsSpawner"]
 
 [node name="SpawnManager" type="Node" parent="."]
 pause_mode = 2
@@ -32,5 +43,6 @@ script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaBound"]
 polygon = PoolVector2Array( -985, -765, 985, -765, 985, 565, -985, 565, -985, -765, -1440, -1160, -1440, 960, 1440, 960, 1440, -1160, -1440, -1160 )
+[connection signal="timeout" from="ItemsSpawner/Timer" to="ItemsSpawner" method="_on_Timer_timeout"]
 [connection signal="spawn_position_lost" from="SpawnManager/SpawnFinder" to="SpawnManager" method="_on_SpawnFinder_spawn_position_lost"]
 [connection signal="body_entered" from="ArenaBound" to="ArenaBound" method="_on_ArenaBound_body_entered"]
