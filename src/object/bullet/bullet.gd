@@ -2,6 +2,8 @@ extends Replayable
 
 const BULLET_ENABLE_DIST: int = 30
 
+export(int, 0, 1000) var _hit_damage: int = 25
+
 onready var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var _spawn_position: Vector2 = global_position
 
@@ -32,9 +34,7 @@ func _physics_process(delta: float) -> void:
 			collision_mask += 2
 			is_being_shot = false
 	_velocity.y += GRAVITY * delta
-	var collision = move_and_collide(_velocity * delta)
-	if collision:
-		log_and_free()
+	move_and_collide(_velocity * delta)
 
 
 func _on_Timer_timeout() -> void:
@@ -43,3 +43,10 @@ func _on_Timer_timeout() -> void:
 	log_and_free()
 
 
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body is Damageable:
+		body.damage(_hit_damage)
+	if not _is_replay:
+		log_and_free()
+	else:
+		queue_free()

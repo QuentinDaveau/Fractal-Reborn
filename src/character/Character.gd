@@ -1,6 +1,5 @@
-extends Replayable
+extends Damageable
 
-const WALL_ANGLE: float = PI/4
 const SNAP_VECT: Vector2 = Vector2.DOWN * 50
 const GROUND_VECT: Vector2 = Vector2.UP
 
@@ -45,3 +44,7 @@ func move(delta: float, velocity: Vector2) -> void:
 
 func get_logs() -> Array:
 	return $Loggers/MotionLogger.get_logs()
+
+
+func hit(damages: int) -> void:
+	$HealthManager.hit(damages)

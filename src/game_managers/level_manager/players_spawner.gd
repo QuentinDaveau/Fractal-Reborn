@@ -6,7 +6,7 @@ signal players_spawned()
 func spawn_players(level: Node, spawn_manager: Node) -> void:
 	get_tree().paused = true
 	var spawn_positions := []
-	for i in range(1):
+	for i in range(2):
 		spawn_manager.find_spawn_position()
 		spawn_positions.append(yield(spawn_manager, "spawn_position_found"))
 	ReplayClock.reset_timer()

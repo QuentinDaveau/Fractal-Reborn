@@ -22,5 +22,5 @@ func _on_Timer_timeout() -> void:
 	var gun_resource: Resource = Warehouse.get_resource("Gun")
 	var gun: Replayable = gun_resource.instance()
 	gun.position = _spawn_position
-	gun.prepare_and_spawn(owner._actif_level, gun_resource)
+	gun.prepare_and_spawn(owner._actif_level.get_entities_container(), gun_resource)
 	$Timer.start(rand_range(MIN_DELAY, MAX_DELAY))

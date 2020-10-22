@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Replayable",
+"class": "Damageable",
+"language": "GDScript",
+"path": "res://src/replayable/damageable/damageable.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Replayable",
 "language": "GDScript",
 "path": "res://src/replayable/replayable.gd"
 } ]
 _global_script_class_icons={
+"Damageable": "",
 "Replayable": ""
 }
 
